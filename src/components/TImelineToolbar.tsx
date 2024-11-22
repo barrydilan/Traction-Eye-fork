@@ -10,20 +10,20 @@ interface TimelineToolbarProps {
 
 export const TimelineToolbar = ({onTimelineSelect, friendWalletAdress}: TimelineToolbarProps) => {
     const walletAddress = useTonAddress();
-    // State for selected timeline
+    console.log(walletAddress, friendWalletAdress)
+
     const [selectedTimeline, setSelectedTimeline] = useState<keyof typeof TIMELINES_INTERVALS_SECONDS>(TimelineKeys.Month);
 
     const handleTimelineSelect = (timeline: keyof typeof TIMELINES_INTERVALS_SECONDS) => {
         setSelectedTimeline(timeline);
         onTimelineSelect(timeline);
-        // Call postEvent to setup swipe behavior
         postEvent('web_app_trigger_haptic_feedback', { type: 'impact', impact_style: 'rigid' });
 
     };
 
-    if(!walletAddress || !friendWalletAdress) {
-        return null;
-    }
+    // if(!walletAddress || !friendWalletAdress) {
+    //     return null;
+    // }
 
     return (
         <div className="mt-3 flex justify-center text-sm">
